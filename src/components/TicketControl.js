@@ -47,9 +47,9 @@ class TicketControl extends React.Component {
   }
 
   handleChangingSelectedTicket = (id) => {
-    const selectedTicket = this.state.masterTicketList.filter(ticket => ticket.id === id)[0];
+    const selectedTicket = this.props.masterTicketList[id];
     this.setState({selectedTicket: selectedTicket});
-  }
+  } //masterTicketList is no longer part of this.state - it's part of the Redux store now and we need to pass it into the component via this.props. Also, masterTicketList is an object now, not an array. No need to use filter anymore - we can just use bracket notation instead. 
 
   handleDeletingTicket = (id) => {
     const { dispatch } = this.props;
@@ -99,7 +99,7 @@ handleEditingTicketInList = (ticketToEdit) => {
       currentlyVisibleState = <NewTicketForm onNewTicketCreation={this.handleAddingNewTicketToList}  />;
       buttonText = "Return to Ticket List";
     } else {
-      currentlyVisibleState = <TicketList ticketList={this.state.masterTicketList} onTicketSelection={this.handleChangingSelectedTicket} />;
+      currentlyVisibleState = <TicketList ticketList={this.props.masterTicketList} onTicketSelection={this.handleChangingSelectedTicket} />;// the difference between this.state (which refers to a class component's state) and this.props (which refers to the props being passed into a component from a parent component or the Redux store).
       buttonText = "Add Ticket";
     }
     return (
