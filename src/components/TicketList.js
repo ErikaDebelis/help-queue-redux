@@ -6,21 +6,24 @@ function TicketList(props){
   return (
     <React.Fragment>
       <hr/>
-      {props.ticketList.map((ticket) =>
+       {/* We now need to map over the values of an object, not an array. */}
+       {Object.values(props.ticketList).map((ticket) =>
         <Ticket
           whenTicketClicked = { props.onTicketSelection }
           names={ticket.names}
           location={ticket.location}
           issue={ticket.issue}
+          formattedWaitTime={ticket.formattedWaitTime}
           id={ticket.id}
           key={ticket.id}/>
       )}
+      {/* First, we iterate over the values of the ticketList. We do this with the Object.values() method, which grabs all the values from the object. Once we have the values, we can map over them. */}
     </React.Fragment>
   );
 }
 
 TicketList.propTypes = {
-  ticketList: PropTypes.array,
+  ticketList: PropTypes.object,
   onTicketSelection: PropTypes.func
 };
 
