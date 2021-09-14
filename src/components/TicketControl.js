@@ -3,6 +3,7 @@ import NewTicketForm from './NewTicketForm';
 import TicketList from './TicketList';
 import TicketDetail from './TicketDetail';
 import EditTicketForm from './EditTicketForm';
+import PropTypes from "prop-types";
 import { connect } from 'react-redux';
 
 class TicketControl extends React.Component {
@@ -110,6 +111,10 @@ handleEditingTicketInList = (ticketToEdit) => {
   }
 
 }
+
+TicketControl.propTypes = {
+  masterTicketList: PropTypes.object
+};
 
 const mapStateToProps = state => {
   return {
